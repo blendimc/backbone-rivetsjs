@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport' />
+    <title>Backbone data binding with rivet.js</title>
+    <meta content='' name='description' />
+    <meta content='' name='author' />
+    <link href='css/bootstrap.css' rel='stylesheet' />
+    <link href='css/app.css' rel='stylesheet' />
+    <script src='js/jquery.js'></script>
+    <script src='js/underscore.js'></script>
+    <script src='js/backbone.js'></script>
+    <script src='js/rivets.js'></script>
+    <script src='js/configure.js'></script>
+    <script src='js/app.js'></script>
+  </head>
+  <body>
+    <div class='page-header'>
+      <h2>Backbone, rivets.js</h2>
+    </div>
+      <table id="productsTable" class="table table-striped" style="width: auto;">
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+        </tr>
+        <tr class='product'>
+          <td><select data-value="product.item"></select></td>
+          <td><input data-value="product.price" type='text' class="r" /></td>
+          <td><input data-value="product.quantity" type='text' class="r" /></td>
+          <td class="r"><span data-text="product.subtotal"></span></td>
+        </tr>
+
+        <tr class='product'>
+          <td><select data-value="product.item"></select></td>
+          <td><input data-value="product.price" type='text' class="r" /></td>
+          <td><input data-value="product.quantity" type='text' class="r" /></td>
+          <td class="r"><span data-text="product.subtotal"></span></td>
+        </tr>
+        <tr class="totals">
+          <td colspan="3"><a href='javascript:' id="addProduct" data-on-click="products:addProduct">Add product</a></td>
+          <td class="total r b"></td>
+        </tr>
+      </table>
+
+  </body>
+
+  <script type="text/template" id="product-template">
+    <tr class='product'>
+      <td>
+        <select data-value="product.item">
+          <option value="50">Skirt</option>
+          <option value="120">Boots</option>
+          <option value="30.5">Pants</option>
+        </select>
+      </td>
+      <td><input data-value="product.price" type='text' class="r" /></td>
+      <td><input data-value="product.quantity" type='text' class="r" /></td>
+      <td class="r"><span data-text="product.subtotal"></span></td>
+    </tr>
+  </script>
+
+  <script>
+    $(function() {
+      var items = [{name: 'Skirt', price: 50}, {name: 'Boots', price: 120}, {name: 'Pants', price: 30.5}];
+      var options = _.map(items, function(elem) { return ['<option value="', elem.price,'">', ,elem.name, '</option>'].join(''); });
+      options = options.join("\n");
+      $('.product').each(function() { $('select').html(options) });
+
+      $($('#product-template').html()).find("select").html(options);
+
+      this.products = products = new ProductsList('#productsTable tr.product', '#productsTable .total');
+      products.setList();
+      products.calculateTotal();
+      rivets.bind($('.totals'), { products: products });
+    });
+
+
+  </script>
+</html>

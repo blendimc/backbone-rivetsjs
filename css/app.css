@@ -1,0 +1,9 @@
+input, select, textarea{
+  width: auto;
+}
+.r{
+  text-align: right;
+}
+.b{
+  font-weight: bold;
+}
