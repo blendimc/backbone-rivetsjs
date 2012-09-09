@@ -1,8 +1,8 @@
 input, select, textarea{
   width: auto;
 }
-.r{
-  text-align: right;
+.right, .r{
+  text-align: right !important;
 }
 .b{
   font-weight: bold;
