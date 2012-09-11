@@ -47,6 +47,9 @@ class @ProductsList extends Backbone.Collection
     rivets.bind(tr, {product: p})
   #
   deleteProduct: (prod, src)->
-    $(src).parents('tr.product').remove()
-    @remove(prod)
-    @calculateTotal()
+    unless @models.length <= 2
+      $(src).parents('tr.product').remove()
+      @remove(prod)
+      @calculateTotal()
+    else
+      alert "There must be at least one product"

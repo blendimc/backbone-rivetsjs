@@ -84,10 +84,8 @@
       $($('#product-template').html()).find("select").html(options);
 
       this.products = products = new ProductsList('#productsTable tr.product', '#productsTable .total');
-      console.log("len", products.length);
       products.setList();
       products.calculateTotal();
-      //var window.prod = products.models[0];
       rivets.bind($('.totals'), { products: products });
     });
 

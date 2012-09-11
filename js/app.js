@@ -96,9 +96,13 @@
     };
 
     ProductsList.prototype.deleteProduct = function(prod, src) {
-      $(src).parents('tr.product').remove();
-      this.remove(prod);
-      return this.calculateTotal();
+      if (!(this.models.length <= 2)) {
+        $(src).parents('tr.product').remove();
+        this.remove(prod);
+        return this.calculateTotal();
+      } else {
+        return alert("There must be at least one product");
+      }
     };
 
     return ProductsList;
