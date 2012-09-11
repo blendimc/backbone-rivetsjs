@@ -31,12 +31,14 @@
           <th>Price</th>
           <th>Quantity</th>
           <th>Subtotal</th>
+          <th></th>
         </tr>
         <tr class='product'>
           <td><select data-value="product.item"></select></td>
           <td><input data-value="product.price" type='text' class="r" /></td>
           <td><input data-value="product.quantity" type='text' class="r" /></td>
           <td class="r"><span data-text="product.subtotal"></span></td>
+          <td><a href="javascript:" data-on-click="product:delete">delete</a></td>
         </tr>
 
         <tr class='product'>
@@ -44,6 +46,7 @@
           <td><input data-value="product.price" type='text' class="r" /></td>
           <td><input data-value="product.quantity" type='text' class="r" /></td>
           <td class="r"><span data-text="product.subtotal"></span></td>
+          <td><a href="javascript:" data-on-click="product:delete">delete</a></td>
         </tr>
         <tr class="totals">
           <td colspan="2">
@@ -67,6 +70,7 @@
       <td><input data-value="product.price" type='text' class="r" /></td>
       <td><input data-value="product.quantity" type='text' class="r" /></td>
       <td class="r"><span data-text="product.subtotal"></span></td>
+      <td><a href="javascript:" data-on-click="product:delete">delete</a></td>
     </tr>
   </script>
 
@@ -80,8 +84,10 @@
       $($('#product-template').html()).find("select").html(options);
 
       this.products = products = new ProductsList('#productsTable tr.product', '#productsTable .total');
+      console.log("len", products.length);
       products.setList();
       products.calculateTotal();
+      //var window.prod = products.models[0];
       rivets.bind($('.totals'), { products: products });
     });
 

@@ -15,6 +15,10 @@ class Product extends Backbone.Model
   setSubtotal: ()->
     sub = 1 * this.get("quantity") * 1 * this.get("price")
     @set('subtotal', sub)
+  # Delete a product from the list
+  delete: (event)=>
+    src = event.currentTarget || event.srcElement
+    @collection.deleteProduct(@, src)
 
 # Products list class
 class @ProductsList extends Backbone.Collection
@@ -37,10 +41,12 @@ class @ProductsList extends Backbone.Collection
   addProduct: =>
     loc = "#{@list}:last"
     $(loc).after($('#product-template').html())
-    console.log $('#product-template').html()
     tr = $(loc).get(0)
 
     @add(p = new Product())
     rivets.bind(tr, {product: p})
   #
-  removeProduct: ->
+  deleteProduct: (prod, src)->
+    $(src).parents('tr.product').remove()
+    @remove(prod)
+    @calculateTotal()
