@@ -63,6 +63,7 @@
     <tr class='product'>
       <td>
         <select data-value="product.item">
+          <option value="0"></option>
           <option value="50">Skirt</option>
           <option value="120">Boots</option>
           <option value="30.5">Pants</option>
@@ -77,7 +78,7 @@
 
   <script>
     $(function() {
-      var items = [{name: 'Skirt', price: 50}, {name: 'Boots', price: 120}, {name: 'Pants', price: 30.5}];
+      var items = [{name:'', price:0}, {name: 'Skirt', price: 50}, {name: 'Boots', price: 120}, {name: 'Pants', price: 30.5}];
       var options = _.map(items, function(elem) { return ['<option value="', elem.price,'">', ,elem.name, '</option>'].join(''); });
       options = options.join("\n");
       $('.product').each(function() { $('select').html(options) });
